@@ -10,43 +10,125 @@ public class AI_01_2d_Shapes_McNeill
 
     public static void main(String[] args) 
     {
+        runCode();
+    }
+
+    public static void runCode()
+    {
         //allows input
         Scanner k = new Scanner(System.in);
-        //calls to functions
-        double length = getLength(k);
-        double width = getWidth(k);
-        double base = getBase(k);
-        double height = getHeight(k);
-        double lengthA = getLengthA(k);
-        double lengthB = getLengthB(k);
-        double radius = getRadius(k);
+
+        //will be used for menu selection
+        int choice;
+
+        //variables that'll help me compare current and previous shape
+        double preArea = -1;
+        double prePerimeter = -1;
+
+        //do while loop for menu that lets program end once certain parameter is met
+        do 
+            {
+                System.out.println("=== Shape Selection Menu ===");
+                //System.out.println("(Select two shapes and then select calculate)");
+                System.out.println("1. Circle");
+                System.out.println("2. Triangle");
+                System.out.println("3. Sqaure");
+                System.out.println("4. Rectangle");
+                System.out.println("5. Exit");
+                //System.out.println("6. Calculate");
+                System.out.print("Select a key labeled 1 through 5: ");
+
+                choice = k.nextInt();
+
+                //case structure to choose shape based off inputed number
+                //along with the functions based on the corresponding shape
+                switch (choice) 
+                {
+                    case 1:
+                        System.out.println("You selected Circle!");
+                        double radius = getRadius(k);
+                        double circleArea = getAreaCircle(radius);
+                        double circumference = getCircumference(radius);
+                        displayCircle(circleArea, circumference);
+                        break;
+                
+                    case 2:
+                        System.out.println("You selected Triangle!");
+                        double base = getBase(k);
+                        double height = getHeight(k);
+                        double lengthA = getLengthA(k);
+                        double lengthB = getLengthB(k);
+                        double triangleArea = getAreaTriangle(base, height);
+                        double trianglePerimeter = getPerimeterTriangle(lengthA, lengthB, base);
+                        displayTriangle(triangleArea,trianglePerimeter);
+
+                        break;
+                    
+                    case 3:
+                        System.out.println("You selected Square!");
+                        double length = getLength(k);
+                        double width = getWidth(k);
+                        double sqaureArea = getAreaQuad(length, width);
+                        double squarePerimeter = getPerimeterQuad(length, width);
+                        displaySquare(sqaureArea, squarePerimeter);
+                        break;
+
+                    case 4:
+                        System.out.println("You selected Rectangle!");
+                        double recLength = getRecLength(k);
+                        double recWidth = getRecWidth(k);
+                        double rectangleArea = getAreaQuad(recLength, recWidth);
+                        double recanglePerimeter = getPerimeterQuad(recLength, recWidth);
+                        displayRectangle(rectangleArea, recanglePerimeter);
+                        break;
+
+                    case 6:
+
+                        break;
+                    
+                    case 5:
+                        System.out.println("Program has ended!");
+                        break;
+
+
+                    default:
+                        System.out.println("Not a valid option. Please try again.");
+
+                }
+                //this is where if statements go, aka outside the case structure and in the do part of the do while
+            } 
         
-        double areaCircle = getAreaCircle(radius);
-        double areaTriangle = getAreaTriangle(base, height);
-        double areaQuad = getAreaQuad(length, width);
-        double circumference = getCircumference(radius);
-        double perimeterTriangle = getPerimeterTriangle(lengthA, lengthB, base);
-        double perimeterQuad = getPerimeterQuad(length, width);
-
-        displayResults(length, width, base, height, lengthA, lengthB, radius, areaCircle, areaTriangle, areaQuad, circumference, perimeterTriangle, perimeterQuad);
+        while (choice != 5);       
     }
-   
-    public static double getLength(Scanner k)
+
+    //circle info
+    public static double getRadius(Scanner k)
     {
-        System.out.print("Enter the length of the quadrilateral: ");
-        double length = k.nextDouble();
+        System.out.print("Enter the radius of the circle: ");
+        double radius = k.nextDouble();
 
-        return length;
+        return radius;
     }
 
-    public static double getWidth(Scanner k)
+    public static double getAreaCircle(double radius)
+    {  
+        return Math.PI * (radius * radius);
+        //if you want to control decimal points either use formatting or declare and initialize variable "pi" to 3.14/3.141/etc
+    }
+
+    public static double getCircumference(double radius)
     {
-        System.out.print("Enter the width of the quadrilateral: ");
-        double width = k.nextDouble();
-
-        return width;
+        return radius* 2 * Math.PI;
+        //if you want to control decimal points either use formatting or declare and initialize variable "pi" to 3.14/3.141/etc
     }
 
+    public static void displayCircle(double circleArea, double circumference)
+    {
+        System.out.println("The area is " + circleArea + ".");
+        System.out.println("The circumference is " + circumference + ".");
+    }
+
+    //triangle info
     public static double getBase(Scanner k)
     {
         System.out.print("Enter the base of the triangle: ");
@@ -73,43 +155,15 @@ public class AI_01_2d_Shapes_McNeill
 
     public static double getLengthB(Scanner k)
     {
-        System.out.print("Enter another side length of the triangle: ");
+        System.out.print("Enter the other side length of the triangle: ");
         double lengthB = k.nextDouble();
 
         return lengthB;
     }
 
-    public static double getRadius(Scanner k)
-    {
-        System.out.print("Enter the radius of the circle: ");
-        double radius = k.nextDouble();
-
-        return radius;
-    }
-
-    public static double getAreaCircle(double radius)
-    {
-        double pi = 3.14159;
-        
-        return pi * (radius * radius);
-    }
-
-
     public static double getAreaTriangle(double base, double height)
     {
         return base * height * 0.5;
-    }
-
-    public static double getAreaQuad(double length, double width)
-    {
-        return length * width;
-    }
-
-    public static double getCircumference(double radius)
-    {
-        double pi = 3.14159;
-
-        return radius* 2 * pi;
     }
 
     public static double getPerimeterTriangle(double lengthA, double lengthB, double base)
@@ -117,26 +171,67 @@ public class AI_01_2d_Shapes_McNeill
         return lengthA + lengthB + base;
     }
 
+    public static void displayTriangle(double triangleArea, double trianglePerimeter)
+    {
+        System.out.println("The area is " + triangleArea + ".");
+        System.out.println("The perimeter is " + trianglePerimeter + ".");
+    }
+
+    //square info
+    public static double getLength(Scanner k)
+    {
+        System.out.print("Enter the length of the square: ");
+        double length = k.nextDouble();
+
+        return length;
+    }
+
+    public static double getWidth(Scanner k)
+    {
+        System.out.print("Enter the width of the square: ");
+        double width = k.nextDouble();
+
+        return width;
+    }
+
+    public static double getAreaQuad(double length, double width)
+    {
+        return length * width;
+    }
+    
     public static double getPerimeterQuad(double length, double width)
     {
         return (length * 2) + (width * 2);
     }
 
-    public static void displayResults(double length, double width, double base, double height, double lengthA, double lengthB, double radius, double areaCircle, double areaTriangle,double areaQuad, double circumference, double perimeterTriangle, double perimeterQuad)
+    public static void displaySquare(double squareArea, double squarePerimeter)
     {
-        System.out.println("The length and width of the quadrilateral is " + length + " and " + width);
-        System.out.println("The base of the triangle is " + base + " and the height of the triangle is " + height);
-        System.out.println("The other two side lengths of the triangle are " + lengthA + " and " + lengthB);
-        System.out.println("The radius of the circle is " + radius);
-        System.out.println("The area of the circle is " + areaCircle);
-        System.out.println("The area of the triangle is " + areaTriangle);
-        System.out.println("The area of the quadrilateral is " + areaQuad);
-        System.out.println("The circumference of the circle is " + circumference);
-        System.out.println("The perimeter of the triangle is " + perimeterTriangle);
-        System.out.println("The perimeter of the quadrilateral is " + perimeterQuad);
+        System.out.println("The area is " + squareArea + ".");
+        System.out.println("The perimeter is " + squarePerimeter + ".");
     }
 
-    //will probably use if statements to deermine the shape and to determine what specific results to display
-    //will also use if statements for comparisons between area and perimeter/circumference
+    //rectangle info
+    public static double getRecLength(Scanner k)
+    {
+        System.out.print("Enter the length of the rectangle: ");
+        double length = k.nextDouble();
+
+        return length;
+    }
+
+    public static double getRecWidth(Scanner k)
+    {
+        System.out.print("Enter the width of the rectangle: ");
+        double width = k.nextDouble();
+
+        return width;
+    }
+
+    public static void displayRectangle(double rectangleArea, double rectanglePerimeter)
+    {
+        System.out.println("The area is " + rectangleArea + ".");
+        System.out.println("The perimeter is " + rectanglePerimeter + ".");
+
+    }
     
 }
