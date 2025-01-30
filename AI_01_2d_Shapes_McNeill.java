@@ -4,6 +4,7 @@
 //This program calculates area and circumference/perimeter of 2d shapes and compares them based off the results
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class AI_01_2d_Shapes_McNeill 
 {
@@ -28,32 +29,36 @@ public class AI_01_2d_Shapes_McNeill
         //do while loop for menu that lets program end once certain parameter is met
         do 
             {
-                System.out.println("=== Shape Selection Menu ===");
-                //System.out.println("(Select two shapes and then select calculate)");
-                System.out.println("1. Circle");
-                System.out.println("2. Triangle");
-                System.out.println("3. Sqaure");
-                System.out.println("4. Rectangle");
+                JOptionPane.showMessageDialog(null, "Select Your Shape", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Select a key labeled 1 through 5", null, JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("1. Circle ●");
+                System.out.println("2. Triangle ▲");
+                System.out.println("3. Sqaure ■");
+                System.out.println("4. Rectangle ▮");
                 System.out.println("5. Exit");
-                //System.out.println("6. Calculate");
-                System.out.print("Select a key labeled 1 through 5: ");
 
                 choice = k.nextInt();
+
+                //store area and perimeter
+                double area = 0, perimeter = 0;
 
                 //case structure to choose shape based off inputed number
                 //along with the functions based on the corresponding shape
                 switch (choice) 
                 {
                     case 1:
-                        System.out.println("You selected Circle!");
+                        JOptionPane.showMessageDialog(null, "You selected Circle!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
                         double radius = getRadius(k);
                         double circleArea = getAreaCircle(radius);
                         double circumference = getCircumference(radius);
                         displayCircle(circleArea, circumference);
+                        area = circleArea;
+                        perimeter = circumference;
+
                         break;
                 
                     case 2:
-                        System.out.println("You selected Triangle!");
+                        JOptionPane.showMessageDialog(null, "You selected Triangle!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
                         double base = getBase(k);
                         double height = getHeight(k);
                         double lengthA = getLengthA(k);
@@ -61,42 +66,81 @@ public class AI_01_2d_Shapes_McNeill
                         double triangleArea = getAreaTriangle(base, height);
                         double trianglePerimeter = getPerimeterTriangle(lengthA, lengthB, base);
                         displayTriangle(triangleArea,trianglePerimeter);
+                        area = triangleArea;
+                        perimeter = trianglePerimeter;
 
                         break;
                     
                     case 3:
-                        System.out.println("You selected Square!");
+                        JOptionPane.showMessageDialog(null, "You selected Square", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
                         double length = getLength(k);
                         double width = getWidth(k);
                         double sqaureArea = getAreaQuad(length, width);
                         double squarePerimeter = getPerimeterQuad(length, width);
                         displaySquare(sqaureArea, squarePerimeter);
+                        area = sqaureArea;
+                        perimeter = squarePerimeter;
+
                         break;
 
                     case 4:
-                        System.out.println("You selected Rectangle!");
+                        JOptionPane.showMessageDialog(null, "You selected Rectangle!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
                         double recLength = getRecLength(k);
                         double recWidth = getRecWidth(k);
                         double rectangleArea = getAreaQuad(recLength, recWidth);
                         double recanglePerimeter = getPerimeterQuad(recLength, recWidth);
                         displayRectangle(rectangleArea, recanglePerimeter);
+                        area = rectangleArea;
+                        perimeter = recanglePerimeter;
+
                         break;
 
-                    case 6:
-
-                        break;
-                    
                     case 5:
-                        System.out.println("Program has ended!");
+                        JOptionPane.showMessageDialog(null, "Program has ended!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
+                        System.exit(0);
                         break;
-
 
                     default:
                         System.out.println("Not a valid option. Please try again.");
+                        JOptionPane.showMessageDialog(null, "Not a valid option. Please try again.", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
 
                 }
                 //this is where if statements go, aka outside the case structure and in the do part of the do while
-            } 
+                if (preArea != -1 && prePerimeter != -1) 
+                {
+                    JOptionPane.showMessageDialog(null, "Comparison with Previous Shape", "▲●■Shape Selection Menu▲●■ ", JOptionPane.INFORMATION_MESSAGE);
+                
+                        if (area > preArea) 
+                        {
+                            JOptionPane.showMessageDialog(null, "Current shape has a larger area.", "Shape Comparison", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else if (area < preArea) 
+                        {
+                            JOptionPane.showMessageDialog(null, "Previous shape had a larger area.", "Shape Comparison", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else 
+                        {
+                            JOptionPane.showMessageDialog(null, "Both shapes have the same area.", "Shape Comparison", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                        if (perimeter > prePerimeter)
+                        {
+                            JOptionPane.showMessageDialog(null, "Current shape has a larger perimeter.", "Shape Comparison", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else if(perimeter < prePerimeter)
+                        {
+                            JOptionPane.showMessageDialog(null, "Previous shape had a larger perimeter.", "Shape Comparison", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Both shaapes have the same perimeter.", "Shape Comparison", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                }
+                
+                    preArea = area;
+                    prePerimeter = perimeter;
+            }
+           
         
         while (choice != 5);       
     }
@@ -104,8 +148,8 @@ public class AI_01_2d_Shapes_McNeill
     //circle info
     public static double getRadius(Scanner k)
     {
-        System.out.print("Enter the radius of the circle: ");
-        double radius = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the radius of the circle", "Circle ●", JOptionPane.QUESTION_MESSAGE);
+        double radius = Double.parseDouble(input);
 
         return radius;
     }
@@ -124,39 +168,39 @@ public class AI_01_2d_Shapes_McNeill
 
     public static void displayCircle(double circleArea, double circumference)
     {
-        System.out.println("The area is " + circleArea + ".");
-        System.out.println("The circumference is " + circumference + ".");
+        JOptionPane.showMessageDialog(null, "The area is " + circleArea + ".", "Circle ●", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The circumference is " + circumference + ".", "Circle ●", JOptionPane.INFORMATION_MESSAGE);
     }
 
     //triangle info
     public static double getBase(Scanner k)
     {
-        System.out.print("Enter the base of the triangle: ");
-        double base = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the base of the triangle:", "Triangle ▲", JOptionPane.QUESTION_MESSAGE);
+        double base = Double.parseDouble(input);
 
         return base;
     }
 
     public static double getHeight(Scanner k)
     {
-        System.out.print("Enter the height of the triangle: ");
-        double height = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the height of the triangle:", "Triangle ▲", JOptionPane.QUESTION_MESSAGE);
+        double height = Double.parseDouble(input);
 
         return height;
     }
 
     public static double getLengthA(Scanner k)
     {
-        System.out.print("Enter one of the side lengths of the triangle: ");
-        double lengthA = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter one of the two remaining side lengths of the triangle:", "Triangle ▲", JOptionPane.QUESTION_MESSAGE);
+        double lengthA = Double.parseDouble(input);
 
         return lengthA;
     }
 
     public static double getLengthB(Scanner k)
     {
-        System.out.print("Enter the other side length of the triangle: ");
-        double lengthB = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the final side length of the triangle:", "Triangle ▲", JOptionPane.QUESTION_MESSAGE);
+        double lengthB = Double.parseDouble(input);
 
         return lengthB;
     }
@@ -173,23 +217,23 @@ public class AI_01_2d_Shapes_McNeill
 
     public static void displayTriangle(double triangleArea, double trianglePerimeter)
     {
-        System.out.println("The area is " + triangleArea + ".");
-        System.out.println("The perimeter is " + trianglePerimeter + ".");
+        JOptionPane.showMessageDialog(null, "The area is " + triangleArea + ".", "Triangle ▲", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The perimeter is " + trianglePerimeter + ".", "Triangle ▲", JOptionPane.QUESTION_MESSAGE);
     }
 
     //square info
     public static double getLength(Scanner k)
     {
-        System.out.print("Enter the length of the square: ");
-        double length = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the length of the square:", "Sqaure ■", JOptionPane.QUESTION_MESSAGE);
+        double length = Double.parseDouble(input);
 
         return length;
     }
 
     public static double getWidth(Scanner k)
     {
-        System.out.print("Enter the width of the square: ");
-        double width = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the width of the sqaure:", "Sqaure ■", JOptionPane.QUESTION_MESSAGE);
+        double width = Double.parseDouble(input);
 
         return width;
     }
@@ -206,31 +250,31 @@ public class AI_01_2d_Shapes_McNeill
 
     public static void displaySquare(double squareArea, double squarePerimeter)
     {
-        System.out.println("The area is " + squareArea + ".");
-        System.out.println("The perimeter is " + squarePerimeter + ".");
+        JOptionPane.showMessageDialog(null, "The area is " + squareArea + ".", "Sqaure ■", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The perimeter is " + squarePerimeter + ".", "Sqaure ■", JOptionPane.INFORMATION_MESSAGE);
     }
 
     //rectangle info
     public static double getRecLength(Scanner k)
     {
-        System.out.print("Enter the length of the rectangle: ");
-        double length = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the length of the rectangle:", "Rectangle ▮", JOptionPane.QUESTION_MESSAGE);
+        double length = Double.parseDouble(input);
 
         return length;
     }
 
     public static double getRecWidth(Scanner k)
     {
-        System.out.print("Enter the width of the rectangle: ");
-        double width = k.nextDouble();
+        String input = JOptionPane.showInputDialog(null, "Enter the width of the rectangle:", "Rectangle ▮", JOptionPane.QUESTION_MESSAGE);
+        double width = Double.parseDouble(input);
 
         return width;
     }
 
     public static void displayRectangle(double rectangleArea, double rectanglePerimeter)
     {
-        System.out.println("The area is " + rectangleArea + ".");
-        System.out.println("The perimeter is " + rectanglePerimeter + ".");
+        JOptionPane.showMessageDialog(null, "The area is " + rectangleArea + ".", "Rectangle ▮", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The perimeter is " + rectanglePerimeter, null, JOptionPane.INFORMATION_MESSAGE);
 
     }
     
