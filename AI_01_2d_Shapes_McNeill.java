@@ -47,53 +47,95 @@ public class AI_01_2d_Shapes_McNeill
                 switch (choice) 
                 {
                     case 1:
-                        JOptionPane.showMessageDialog(null, "You selected Circle!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
-                        double radius = getRadius(k);
-                        double circleArea = getAreaCircle(radius);
-                        double circumference = getCircumference(radius);
-                        displayCircle(circleArea, circumference);
-                        area = circleArea;
-                        perimeter = circumference;
-
-                        break;
+                        int option1 = JOptionPane.showConfirmDialog(null, "You selected Circle! Is this your shape?", "▲●■Shape Selection Menu▲●■", JOptionPane.YES_NO_OPTION);
+                        
+                        if (option1 == JOptionPane.YES_OPTION)
+                        {
+                            double radius = getRadius(k);
+                            double circleArea = getAreaCircle(radius);
+                            double circumference = getCircumference(radius);
+                            displayCircle(circleArea, circumference);
+                            area = circleArea;
+                            perimeter = circumference;
+    
+                            break;                           
+                        } 
+                        
+                        else if (option1 == JOptionPane.NO_OPTION) 
+                        {
+                            JOptionPane.showMessageDialog(null, "Restarting Program!", "▲●■Shape Selection Menu▲●■", JOptionPane.ERROR_MESSAGE);
+                            runCode();
+                        }        
                 
                     case 2:
-                        JOptionPane.showMessageDialog(null, "You selected Triangle!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
-                        double base = getBase(k);
-                        double height = getHeight(k);
-                        double lengthA = getLengthA(k);
-                        double lengthB = getLengthB(k);
-                        double triangleArea = getAreaTriangle(base, height);
-                        double trianglePerimeter = getPerimeterTriangle(lengthA, lengthB, base);
-                        displayTriangle(triangleArea,trianglePerimeter);
-                        area = triangleArea;
-                        perimeter = trianglePerimeter;
+                        int option2 = JOptionPane.showConfirmDialog(null, "You selected Triangle!", "▲●■Shape Selection Menu▲●■", JOptionPane.YES_NO_OPTION);
 
-                        break;
+                        if (option2 == JOptionPane.YES_OPTION)
+                        {
+                            double base = getBase(k);
+                            double height = getHeight(k);
+                            double lengthA = getLengthA(k);
+                            double lengthB = getLengthB(k);
+                            double triangleArea = getAreaTriangle(base, height);
+                            double trianglePerimeter = getPerimeterTriangle(lengthA, lengthB, base);
+                            displayTriangle(triangleArea,trianglePerimeter);
+                            area = triangleArea;
+                            perimeter = trianglePerimeter;
+
+                            break;
+                        }
+
+                        else if (option2 == JOptionPane.NO_OPTION)
+                        {
+                            JOptionPane.showMessageDialog(null, "Restarting Program!", "▲●■Shape Selection Menu▲●■", JOptionPane.ERROR_MESSAGE);
+                            runCode();
+                        }
+                        
                     
                     case 3:
-                        JOptionPane.showMessageDialog(null, "You selected Square", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
-                        double length = getLength(k);
-                        double width = getWidth(k);
-                        double sqaureArea = getAreaQuad(length, width);
-                        double squarePerimeter = getPerimeterQuad(length, width);
-                        displaySquare(sqaureArea, squarePerimeter);
-                        area = sqaureArea;
-                        perimeter = squarePerimeter;
+                        int option3 = JOptionPane.showConfirmDialog(null, "You selected Square", "▲●■Shape Selection Menu▲●■", JOptionPane.YES_NO_OPTION);
 
-                        break;
+                        if (option3 == JOptionPane.YES_OPTION) 
+                        {
+                            double length = getLength(k);
+                            double width = getWidth(k);
+                            double sqaureArea = getAreaQuad(length, width);
+                            double squarePerimeter = getPerimeterQuad(length, width);
+                            displaySquare(sqaureArea, squarePerimeter);
+                            area = sqaureArea;
+                            perimeter = squarePerimeter;
+
+                            break;
+                        }
+
+                        else if (option3 == JOptionPane.NO_OPTION)
+                        {
+                            JOptionPane.showMessageDialog(null, "Restarting Program!", "▲●■Shape Selection Menu▲●■", JOptionPane.ERROR_MESSAGE);
+                            runCode();
+                        }
 
                     case 4:
-                        JOptionPane.showMessageDialog(null, "You selected Rectangle!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
-                        double recLength = getRecLength(k);
-                        double recWidth = getRecWidth(k);
-                        double rectangleArea = getAreaQuad(recLength, recWidth);
-                        double recanglePerimeter = getPerimeterQuad(recLength, recWidth);
-                        displayRectangle(rectangleArea, recanglePerimeter);
-                        area = rectangleArea;
-                        perimeter = recanglePerimeter;
+                        int option4 = JOptionPane.showConfirmDialog(null, "You selected Rectangle!", "▲●■Shape Selection Menu▲●■", JOptionPane.YES_NO_OPTION);
 
-                        break;
+                        if (option4 == JOptionPane.YES_OPTION) 
+                        {
+                            double recLength = getRecLength(k);
+                            double recWidth = getRecWidth(k);
+                            double rectangleArea = getAreaQuad(recLength, recWidth);
+                            double recanglePerimeter = getPerimeterQuad(recLength, recWidth);
+                            displayRectangle(rectangleArea, recanglePerimeter);
+                            area = rectangleArea;
+                            perimeter = recanglePerimeter;
+    
+                            break;
+                        }
+
+                        else if (option4 == JOptionPane.NO_OPTION)
+                        {
+                            JOptionPane.showMessageDialog(null, "Restarting Program!", "▲●■Shape Selection Menu▲●■", JOptionPane.ERROR_MESSAGE);
+                            runCode();
+                        }
+                        
 
                     case 5:
                         JOptionPane.showMessageDialog(null, "Program has ended!", "▲●■Shape Selection Menu▲●■", JOptionPane.INFORMATION_MESSAGE);
